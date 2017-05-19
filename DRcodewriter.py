@@ -14,6 +14,9 @@ See, I play way more cases than I've made. I figure, if I make this, I might as
 well let other people use this so I can play their stuff.
 Of course, that means making this as accessible, generic, and customizable
 as possible.
+
+That's why this file has more comments than code.
+
 In conclusion, to everyone with actual programming prowess (which excludes me),
 please bear with me.
 '''
