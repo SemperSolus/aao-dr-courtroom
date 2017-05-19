@@ -487,7 +487,10 @@ def not_transition(direction):
         print("erase")
 #If you changed the arguments to be one letter long, you have to change
 #" of center" to "c". Don't forget the space.
-        print("place, 3wide, "+direction+" of center")
+        if(direction[0]!='c'):
+            print("place, 3wide, "+direction+" of center")
+        else:
+            print("place, 3wide, center")
         for x in range(students.index(student)-1,students.index(student)+1):
             newstudent = students[x%(len(students))]
             for bg in locbg.get(newstudent):
