@@ -434,6 +434,7 @@ def checkemo(student, dif,x):
         print(student+"_emo = "+emotion)
         print("$"+student+emotion+str(x))
     for emotion in emo[student].keys():
+        print("anc $"+student+emotion+str(x)+":")
         print("revObj")
         print(placedict.get(dif))
         print(student + "_" +emotion+"_"+ str(x))
