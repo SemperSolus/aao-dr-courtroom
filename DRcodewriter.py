@@ -306,7 +306,7 @@ def addCourtBgs():
             for fg in locfg[student]:
 #Okay, same deal, but for foregrounds.
                 for x in range(int(place.replace("wide",''))):
-                    if (student != "first"): #DEBUG
+                    if (student != FIRST): #DEBUG
                         break #DEBUG
                     print(place + " background {")
                     print("path: " + str(fgs.get(fg)))
@@ -406,10 +406,9 @@ def transition():
                     checkemo(newstudent, dif,y)
                     print("merge")
                     print("anc $after"+newstudent+placedict.get(dif)+str(y)+":")
-                for bg in locbg.get(newstudent):
-                    print("RevObj")
-                    print(placedict.get(dif))
-                    print(bg+"_"+str(y))
+                print("RevObj")
+                for bg in locbg.get(newstudent):                    
+                    print(placedict.get(dif)+", "+bg+"_"+str(y))
                 '''
 You know, all this redundancy could be avoided with another dictionary.
 Maybe put the name of the object as the key and "foreground"/"background" as the
@@ -418,10 +417,8 @@ That would save a lot of run time because you wouldn't be iterating through the
 same list as many times.
 ... Anyone want to do this? Because I'll just be happy if it works.
 '''
-                for fg in locfg.get(newstudent):
-                    print("RevObj")
-                    print(placedict.get(dif))
-                    print(fg+"_"+str(y))
+                for fg in locfg.get(newstudent):                
+                    print(placedict.get(dif)+", "+fg+"_"+str(y))
             print("scroll, linear")            
             print("}\n")
 
@@ -439,8 +436,7 @@ def checkemo(student, dif,x):
     for emotion in emo[student].keys():
         print("anc $"+student+emotion+str(x)+":")
         print("revObj")
-        print(placedict.get(dif))
-        print(student + "_" +emotion+"_"+ str(x))
+        print(placedict.get(dif)+", "+student + "_" +emotion+"_"+ str(x))
         print("proceed, $after"+student+placedict.get(dif)+str(x))
 
 '''
@@ -498,12 +494,10 @@ def not_transition(direction):
             newstudent = students[x%(len(students))]
             for bg in locbg.get(newstudent):
                 print("RevObj")
-                print(placedict.get(1))
-                print(bg+"_"+str(x))                
+                print(placedict.get(1)+", "+bg+"_"+str(x))                
             for fg in locfg.get(newstudent):
                 print("RevObj")
-                print(placedict.get(1))
-                print(fg+"_"+str(x))
+                print(placedict.get(1)+", "+fg+"_"+str(x))
         print("set_sprite ," +student+", "+list(emo.get(student).keys())[0])
         print("cPos, center")
         print("}\n")
@@ -537,23 +531,29 @@ imagine putting this into AAO every time?
 '''
 def hideall():
     print("hideall {")
+    print("hideObj")
     for place in places:
         for student in students:
             emolist = emo[student]
-            for emotion in emolist.keys():
+            for emotion in emolist.keys():            
                 for x in range(int(place.replace("wide",""))):                
                     candidate = place+"_"+student + "_" +emotion+"_"+ str(x)                    
                     if(candidate not in setofobjs):
-                        print("hideObj")
-                        print(place)
-                        print(student + "_" +emotion+"_"+ str(x)+"\n")
+                        print(place+", "+student + "_" +emotion+"_"+ str(x))
                         setofobjs.add(candidate)
             for bg in locbg[student]:
                 for x in range(int(place.replace("wide",""))):
                     if((bg+"_"+str(x)) in setofobjs):
                        continue
-                    print("hideObj")
-                    print(place)
-                    print(bg+"_"+ str(x))
+                    #print("hideObj")
+                    print(place+", "+bg+"_"+ str(x))
                     setofobjs.add(bg+"_"+ str(x))
+            for fg in locfg[student]:
+                for x in range(int(place.replace("wide",""))):
+                    if((fg+"_"+str(x)) in setofobjs):
+                       continue
+                    #print("hideObj")
+                    print(place)
+                    print(fg+"_"+ str(x))
+                    setofobjs.add(fg+"_"+ str(x))
     print("}\n")
