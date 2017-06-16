@@ -214,15 +214,17 @@ locfg = {FIRST:["podium"],
 '''
 This dictionary is pretty much just because Python doesn't support
 switch statements.
-IMPORTANT: Making a case with FEWER than 16 students is easy. You just edit
-the students list and all the relevant data structures. Making a case with
+IMPORTANT: Making a case with FEWER than 16 students is easy. You just delete
+a few elements from the students list. Boom. 10 podiums. Making a case with
 MORE than 16? Gonna take a bit more work. Doable work, though.
-Basically, you make some more PNG files like wide3 and wide5, so that it can
+Basically, you make some more PNG files like 3wide and 6wide, so that it can
 handle transitions between the extra students. Then you edit every data
 structure with the word "place" in it.
+(A function is not a data structure. A list or dictionary is.)
 For example, if you want 19 students, you're going to have to handle transitions
 between 9 and 10 students now, so you'll need blank PNGs that are 2560 and 2816
 pixels wide respectively (10wide and 11wide).
+
 '''
 placedict = {1:"3wide",2:"3wide",3:"7wide",4:"9wide",5:"6wide",6:"7wide",
              7:"15wide",8:"9wide",14:"15wide"}
@@ -263,7 +265,7 @@ If you don't type "none", "linear", "bezier", "ease_in", or "ease_out",
 It won't type a scroll at all, and you'll have to put in a scroll type each
 time, if that's your thing.
 '''
-    transition('ease_out')
+    transition()
     setemo('ease_out')
 #If you think "_from_left" is too much to write, just change what's written
 #here to "l", "r", and "c". Nothing else works, tho. 
@@ -383,12 +385,15 @@ def initCourtObjs():
                 print("hidden: true\n}\n")
 
 '''
-This is a companion function to the above function.
+This is a companion function to the above method.
 As long as the third argument is an empty string, it takes every character
 in the second argument, and removes every instance of it from the first
 argument.
-It also can be used for other stuff. Want to change every instance of the letter
-"a" in The Cat in the Hat to a "oo".
+It also can be used for other stuff. Want to change every vowel in The Cat in
+the Hat to a double "o"? Just type deletechars(text, 'oaeiuy', 'oo').
+It works as long as you've previously assigned the variable text the value of
+the entire text of The Cat in the Hat.
+(And it won't work on capital letters)
 '''
 def deletechars(place,string1,empty=''):
     place = place.replace(string1[0],empty)
@@ -412,7 +417,8 @@ zz_y
 As you can see, the transition macro needs to be a separate frame.
 
 '''
-def transition(scrollType):
+def transition():
+    import math
     for s1 in students:
         for s2 in students:
             if (s1 == s2):
@@ -463,7 +469,10 @@ def transition(scrollType):
                     print("set_sprite, "+students[(students.index(s1)-int(dif/2))%len(students)]+", n")
                 else:
                     print("set_sprite, "+students[(students.index(s1)-int(dif*2))%len(students)]+", n")
-            if(dif%2==0 and dif != 4):
+#I imported logarithms just for this if. The difference between students has to
+#be even--but not an even power of two--in order for the third student to be in
+#the center.
+            if(dif%2==0 and (math.log(dif)/math.log(2)) % 2 != 0):
                 print("cPos, center")
             else:
                 if(startPos=='left'):
@@ -471,7 +480,6 @@ def transition(scrollType):
                 else:
                     print("cPos, left")
             print("wait, 5")
-            print("scroll, "+scrollType)
             print("}\n")
             
 '''
