@@ -235,20 +235,14 @@ pixels wide respectively (10wide and 11wide).
 placedict = {1:"3wide",2:"3wide",3:"7wide",4:"9wide",5:"6wide",6:"7wide",
              7:"15wide",8:"9wide",14:"15wide"}
 
-'''
-What is this? This is a data structure called a set. 'bob' is in here so Python
-doesn't think it's a dictionary. They both look the same when they're empty.
-The two things you have to remember about sets are that their elements aren't
-in any order and they can't contain duplicates.
-If you try to give them a duplicate element, they'll delete it.
-Sets are important in programming and math. Just thought I'd share that.
-'''
-setofobjs = {'bob'}
 
 
-
+# These are used in the deletechars function later in this file.
+# Since all the places are written as [characterprefix]+[number],
+# You can isolate one of the two using deletechars.
 alphabetplus = "abcdefghijklmnopqrstuvwxyz+"
 numberplus = "1234567890+"
+
 
 '''
 The idea of this list is to hold all the places that were created so they can
@@ -260,42 +254,55 @@ createdPlaces = []
 
 
 '''
-Don't call main. Main prints the results of all the functions. That's not as
-useful.
 Call objects to call just the functions that print objects,
 Call frames to call only the functions that print frames,
 And call macros to call the functions that print macros.
 Then paste the results into the appropriate text folder.
 '''
-def main():
-    makeplace("3wide",wide3)
-    makeplace("6wide",wide6)
-    makeplace("7wide",wide7)
-    makeplace("9wide",wide9)
-    makeplace("15wide",wide15)
-    addEmoBgs()
-    addCourtBgs()
-    setemo()
-    hideall()
-
 def objects():
     makePlace()
     initCourtObjs()
     
 def macros():
-    transition()
-    setemo()
+    '''
+In my attempt to make this code as customizeable as possible, you can change
+the way the courtroom scrolls here.
+If you don't type "none", "linear", "bezier", "ease_in", or "ease_out",
+It won't type a scroll at all, and you'll have to put in a scroll type each
+time, if that's your thing.
+'''
+    transition('ease_out')
+    setemo('ease_out')
 #If you think "_from_left" is too much to write, just change what's written
-#here to "l", "r", and "c". 
+#here to "l", "r", and "c". Nothing else works, tho. 
     notTransition("left")
     notTransition("right")
     notTransition("center")
 
 def frames():
+    '''
+The first argument here is the frame anchor you use to start the routine that
+changes the emotions of all the still sprite background objects, and the
+second argument is the variable you will have to type repeatedly as you assign
+frame anchors to it in order to get back.
+
+If you do not understand what I just said, please read the Catalysis user guide
+and a tutorial on variables in AAO. It's kind of beyond the scope of comments
+in a python file.
+'''
     checkall("checkAll","backFromCheckAll")
 
 
-
+'''
+There are a lot of places. How many places?
+Take the number of trial participants, and divide it by 2.
+Take away all the odd powers of 2 from 1 until that number, inclusive.
+Take away the even numbers that aren't even powers of 2 from 1 until that
+number, inclusive.
+Take the number you have now, and multiply it by the number of participants.
+In the program's default settings, this number is 80.
+If you add to 
+'''
 def makePlace():
     global createdPlaces
     for place in places.keys():
@@ -310,6 +317,9 @@ def makePlace():
             createdPlaces.append(student+"+"+(str(int(place.replace("wide",''))-1)))
     createdPlaces = list(set(createdPlaces))
 
+
+#This function is mostly for debugging purposes, so the other functions can
+#run without running makePlace().
 def harmlessMakePlace():
     global createdPlaces
     for place in places.keys():
@@ -326,8 +336,12 @@ def harmlessMakePlace():
     createdPlaces = list(set(createdPlaces))
 
 
-#CANNOT BE RUN BEFORE makePlace()
-    #... oop, now it can.
+'''
+This function makes all the courtroom foreground and background objects, as
+well as the still sprites of each character that can't be placed in a place.
+Those are placed as background objects.
+That's how you get 9 people in one scene!
+'''
 def initCourtObjs():
     if not createdPlaces:
         harmlessMakePlace()
@@ -338,8 +352,8 @@ def initCourtObjs():
 #If I got this right, that code is supposed to take the place name, get rid of
 #the student name, and then start with the second character to get rid of the
 #plus sign.
-        #x goes from 0 to [number after the plus]?
-        for x in range(int(place.replace(s1,'')[1:])):
+#I wrote it before I made the deletechars() function.
+        for x in range(int(place.replace(s1,'')[1:])+1):
             emolist = emo[students[(students.index(s1)+x)%len(students)]]
             for bg in locbg.get(students[(students.index(s1)+x)%len(students)]):
                 print(place+" background {")
@@ -361,7 +375,6 @@ def initCourtObjs():
  #               print("hidden: false")
                 print("}\n")            
             for emotion in emolist.keys():
-                #if (students[(students.index(s1)+x)%len(students)]==s1):
                 if(x ==0):
                     continue
                 if (students[(students.index(s1)+x)%len(students)]==
@@ -382,7 +395,8 @@ This is a companion function to the above function.
 As long as the third argument is an empty string, it takes every character
 in the second argument, and removes every instance of it from the first
 argument.
-... Which, in this case, leaves just the student prefix.
+It also can be used for other stuff. Want to change every instance of the letter
+"a" in The Cat in the Hat to a "oo".
 '''
 def deletechars(place,string1,empty=''):
     place = place.replace(string1[0],empty)
@@ -393,82 +407,20 @@ def deletechars(place,string1,empty=''):
 
 
 '''
-def addCourtBgs():
-#Hoo, boy. This is the Nested Loop every Python developer tells you not to do.
-#The first loop iterates through the list of places.
-    for place in places.keys():
-#The next layer iterates through the list of students.
-        for student in students:
-#The next layer iterates through the dictionary of images behind each student.
-            for bg in locbg[student]:
-#This layer iterates through the list of images.
-    
-#This layer runs once for each time the place is wider than the screen.
-
-                for x in range(int(place.replace("wide",''))):
-                    if (student != FIRST): #DEBUG
-                        break #DEBUG
-                    print(place + " background {")
-                    print("path: " + str(bgs.get(bg)))
-                    print("x: " + str(x*256))
-                    print("y: 0")
-                    print("name: " + bg +"_"+ str(x))
-                    print("hidden: true")
-                    print("}\n")
-            for fg in locfg[student]:
-#Okay, same deal, but for foregrounds.
-                for x in range(int(place.replace("wide",''))):
-                    if (student != FIRST): #DEBUG
-                        break #DEBUG
-                    print(place + " background {")
-                    print("path: " + str(fgs.get(fg)))
-                    print("x: " + str(x*256))
-                    print("y: 0")
-                    print("name: " + fg +"_"+ str(x))
-                    print("hidden: true")
-                    print("}\n")
-#I know this function is called "addCourtBgs". It also does fgs.
-#I forgot about them until later.
-'''
-
-def addEmoBgs():
-#Here we go. Forbidden Nested Loop #2.
-#The first loop iterates through the list of places.
-    for place in places.keys():
-#The next layer iterates through the list of students.
-        for student in students:
-#Each student corresponds to a dictionary whose keys are emotions and values
-       #are external image URLs.
-            emolist = emo[student]
-#The next layer iterates through the dictionary of that student's emotions.
-            for emotion in emolist.keys():
-#This layer runs once for each time the place is wider than the screen.
-               for x in range(int(place.replace("wide",''))):
-                      # if (student != FIRST):
-                       #    break
-                       print(place + " background {")
-                       print("path: " + emolist[emotion])
-                       print("x: " + str(x*256))
-                       print("y: 0")
-                       print("name: " + student + "_" +emotion+"_"+ str(x))
-                       print("hidden: true")
-                       print("}\n")
-               
-
-'''
 This function prints macros that cause the screen to seamlessly slide from
 any student to any other. It's the whole reason I did this.
 
-... Or, at least, it's supposed to. It's not really working, and it eats a
-lot of frames. If anyone, after looking at this code and at the Catalysis
-guide, figures out what's wrong with it, please shoot me a message on Github
-asking to collaborate.
+For example, to scroll from a character with prefix zz to prefix xx, you'd type
 
-If you can't, and you want to use a DanganRonpa courtroom in the meantime, I
-recommend using the not_transition methods in the meantime. That's the poor
-man's solution.
+zz_to_xx
+
+zz.y
+zz_y
+
+As you can see, the transition macro needs to be a separate frame.
+
 '''
-def transition():
+def transition(scrollType):
     for s1 in students:
         for s2 in students:
             if (s1 == s2):
@@ -527,13 +479,36 @@ def transition():
                 else:
                     print("cPos, left")
             print("wait, 5")
-            print("scroll, bezier")
+            print("scroll, "+scrollType)
             print("}\n")
             
-                                    
+'''
+This function generates a little under 200 frames, which hide all the background
+objects that are emotions people who aren't currently feeling.
+It then calls another function several times, revealing the correct emotions.
+I can't think of a better, automatic way to do it.
+I tested it in AAO, and there is a noticeable lag, so plan around that.
+To use, just write the following in Catalysis:
 
+wait, 1
+varDef
+backFromCheckAll, $frame: X$
 
+wait, 1
+proceed, checkAll
+
+wait, 1
+anc, X
+
+X can be whatever you want. You'll be using a bunch of different X's as you
+"call" this "function" throughout the course of your trial.
+In the first frame, you set the return frame, which is the third frame.
+In the second frame, you do the calling of the function, by which I mean you
+go to the frame where the function starts.
+'''
 def checkall(checkAll, backFromCheckAll):
+    #There are comments for where the code starts and ends for your convenience.
+    print("//CODE STARTS HERE")
     if not createdPlaces:
         harmlessMakePlace()
     print("anc, "+checkAll)
@@ -544,10 +519,6 @@ def checkall(checkAll, backFromCheckAll):
         for emotion in emo[student].keys():
             for place in createdPlaces:
                 personInPlace = False
-                #if (student==deletechars(place,numberplus) or
-                #   (students.index(student)==(students.index(deletechars(place,numberplus))+int(deletechars(place,alphabetplus))))
-                #   or (students.index(student)==students.index(deletechars(place,numberplus))+(int(deletechars(place,alphabetplus)))/2)):
-                #    continue
                 for x in range(1,int(deletechars(place,alphabetplus))-1):
                     if(students[(students.index(deletechars(place,numberplus))+x)%len(students)]==student and x*2!=int(deletechars(place,alphabetplus))):
                         personInPlace = True
@@ -561,10 +532,11 @@ def checkall(checkAll, backFromCheckAll):
             print("\nanc, afterCheckAll")
     print("wait, 1")
     print("proceed, {"+backFromCheckAll+"}\n")
+    print("//CODE ENDS HERE")
         
         
 
-#CANNOT BE RUN BEFORE makePlace().
+#This function reveals one emotion of one student.
 def checkemo(student):
     if not createdPlaces:
         harmlessMakePlace()
@@ -611,16 +583,23 @@ This is some text I (the character) am saying.
 
 That's some redundant typing, I know,
 but this way, you get that DanganRonpa effect where the background characters
-are displaying the emotion they last had.
+are displaying the emotion they last had, as long as you use the frames
+generated by the frames() function to set them per the variables these macros
+redefine.
 '''
 
 
-def setemo():
+def setemo(scrollType):
     for student in students:
         for emotion in emo.get(student,"ERROR").keys():
             print(student+"_"+emotion+" {")
             print("pPos, auto")
-            print("scroll, bezier")
+            if(scrollType=="none" or
+               scrollType =="linear" or
+               scrollType =="bezier" or
+               scrollType =="ease_in" or
+               scrollType == "ease_out"):
+                print("scroll, "+scrollType)
             print("varDef")
             print(student+"_emo, " + emotion + "\n}")
             print()
@@ -638,32 +617,8 @@ when you have identical backgrounds behind all the characters.
 In addition to xx_from_left and xx_from_right, there's a third macro,
 "xx_from_center". That lets you cut directly to the character, no pan.
 This is useful when transitioning from any "judge" figure you have.
-
-def not_transition(direction):
-    for student in students:
-        if(len(direction)>0):
-            print(student+"_from_"+direction+" {")
-        else:
-#this covers the case where someone wants to use short characters for this.
-#I prefer the other way, because it's easier to read, so the code works for
-#both.
-            print(student+"_from_c {")
-        print("erase")
-#If you changed the arguments to be one letter long, you have to change
-#" of center" to "c". Don't forget the space.
-        if(direction[0]!='c'):
-            print("place, "+student+"+2, "+direction+" of center")
-        else:
-            print("place, "+student+"+2, center")
-        
-        print("}\n")
-            
-
-This is important: This function shows the background objects of your
-character's neighbors, and the foreground objects of your character's
-neighbors, but it doesn't show your neighbors.
-This is to conserve frames, which are a finite resource when making trials.
-If enough people complain, I'll fix this.
+... Or when you don't want to scroll all the way, but have two characters with
+identical backgrounds and don't want to look like one of them shape-shifted.
 '''
 
 def notTransition(direction):
