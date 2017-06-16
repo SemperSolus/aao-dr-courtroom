@@ -349,7 +349,7 @@ def initCourtObjs():
                 print("path: "+bgs.get(bg))
 #all background items are always visible. If you want to change this yourself,
 #nobody's stopping you.
-                print("hidden: false")
+#                print("hidden: false")
                 print("}\n")
             for fg in locfg.get(students[(students.index(s1)+x)%len(students)]):
                 print(place+" foreground {")
@@ -358,7 +358,7 @@ def initCourtObjs():
                 print("x: "+str(x*256))
                 print("path: "+fgs.get(fg))
 #When would you hide a foreground object, though? Vanishing podiums?
-                print("hidden: false")
+ #               print("hidden: false")
                 print("}\n")            
             for emotion in emolist.keys():
                 #if (students[(students.index(s1)+x)%len(students)]==s1):
@@ -504,7 +504,7 @@ def transition():
                 if(endPos=='right'):
                     print("place, "+s1+"+"+str(dif)+", "+startPos)
                 else:
-                    print("place, "+s1+"+"+str(dif*2)+", "+endPos)
+                    print("place, "+s1+"+"+str(dif*2)+", "+startPos)
             print("set_sprite, "+s1+", n")
             print("cPos, "+startPos)
             print("set_sprite, "+s2+", n")
@@ -526,6 +526,8 @@ def transition():
                     print("cPos, right")
                 else:
                     print("cPos, left")
+            print("wait, 5")
+            print("scroll, bezier")
             print("}\n")
             
                                     
@@ -617,6 +619,8 @@ def setemo():
     for student in students:
         for emotion in emo.get(student,"ERROR").keys():
             print(student+"_"+emotion+" {")
+            print("pPos, auto")
+            print("scroll, bezier")
             print("varDef")
             print(student+"_emo, " + emotion + "\n}")
             print()
@@ -673,7 +677,7 @@ def notTransition(direction):
         else:
             print("place, "+students[(students.index(student)-3)%len(students)]+"+6, "+direction)        
         print("set_sprite, "+student+", n")
-        print("cPos, center")
+        print("wait, 1")
         print("}\n")
 
 
