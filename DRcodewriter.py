@@ -10,11 +10,7 @@ that's pretty great, but since the process for making a DanganRonpa courtroom
 does require manipulating and executing a program, I've decided to make my
 documentation a little... TOO thorough.
 
-<<<<<<< HEAD
-See, I play way more cases than I've made. I figure, if I make this, I might as
-=======
 I play way more cases than I've made. I figure, if I make this, I might as
->>>>>>> origin/master
 well let other people use this so I can play their stuff.
 Of course, that means making this as accessible, generic, and customizable
 as possible.
@@ -27,20 +23,12 @@ please bear with me.
 
 #On to the code...
 
-<<<<<<< HEAD
-'''
-The PREFIXES of your characters go here.
-
-The characters that are already here are just for debugging purposes.
-They're from AAO's Random Characters thread.
-=======
 
 
 
 '''
 The things in quotes are the Catalysis prefixes of your characters.
 The ones that are currently here are ones I put in for testing purposes.
->>>>>>> origin/master
 '''
 FIRST = "jc" #justin chevalier by Aeliren
 SECOND = "ak" #alicia knightly by FenrirDarkWolf
@@ -60,7 +48,7 @@ FIFTEENTH = "ts" #ta'mha shii by Lind
 SIXTEENTH = "dd" #desron delite by DragonTrainer
 
 '''
-See the following links? Don't change them unless they stop working.
+See the following URLs? Don't change them unless they stop working.
 They are generic enough to work for any user who wants a DanganRonpa-esque
 trial with 16 or fewer students.
 Plus, they take up less than 1KB on my GitHub.
@@ -74,23 +62,11 @@ because pngs are saved in the format of "a pixel's color, how many pixels are
 that color until the next one, and so on." Since all pixels are the same color,
 You save space big-time.
 '''
-wide3 = "http://SemperSolus.github.io/3wide.png"
-wide6 = "http://SemperSolus.github.io/6wide.png"
-wide7 = "http://SemperSolus.github.io/7wide.png"
-wide9 = "http://SemperSolus.github.io/9wide.png"
-wide11 = "http://SemperSolus.github.io/11wide.png"
-wide15 = "http://SemperSolus.github.io/15wide.png"
-<<<<<<< HEAD
-places = ["3wide","6wide","7wide","9wide","15wide"]
-=======
-
-
 places = {"3wide":"http://SemperSolus.github.io/3wide.png",
           "6wide":"http://SemperSolus.github.io/6wide.png",
           "7wide":"http://SemperSolus.github.io/7wide.png",
           "9wide":"http://SemperSolus.github.io/9wide.png",
           "15wide":"http://SemperSolus.github.io/15wide.png"}
->>>>>>> origin/master
 
 '''
 The key to this dict is the NAME of the background object.
@@ -103,11 +79,7 @@ bgs = {"bg":"https://i.imgur.com/4IXP175.png",
        "pillar":"https://i.imgur.com/1UoUcxh.png",
        "throne":"https://i.imgur.com/rtsXEWU.png"}
 
-<<<<<<< HEAD
-# Similarly, foreground objects go here.
-=======
 # Similarly, foreground objects go here. You can have more than one.
->>>>>>> origin/master
 
 fgs = {"podium":"https://i.imgur.com/tvPMuyc.png"}
 
@@ -116,21 +88,12 @@ If you want to change the number of students, don't forget to change
 this list.
 For whatever reason (so many people could use it, I guess), I tried to make
 the code incredibly dynamic. Instead of referring to a static number of
-<<<<<<< HEAD
-students, like 16, I referred to the length of this list.
-Also, this list is handy for changing who is next to whom. Just move 'em around.
-
-Ooh! Right. If you want to leave a seat empty, like the first DR game, that's
-not done here. That's done over in emo{}. Make a blank 192x256 rectangle or
-something.
-=======
 students, like 16, I always refer to the length of this list.
 Also, this list is handy for changing who is next to whom. Just move 'em around.
 
 Ooh! Right. If you want to leave a seat empty, like the first DR game, that's
 not done here. That's done over in emo{}. Make a transparent 192x256 rectangle
 or something. Or leave the dict empty? Does that work?
->>>>>>> origin/master
 '''
 students = [FIRST,SECOND,THIRD,FOURTH,FIFTH,
             SIXTH,SEVENTH,EIGHTH,NINTH,TENTH,
@@ -146,12 +109,8 @@ This code absolutely does not work with the pre-installed AAO sprites.
 (I'm not saying it's impossible; I'm just saying it's a lot of work for me.)
 
 Also note that a sprite's "default" expression should be first in the
-<<<<<<< HEAD
-dictionary.
-=======
 dictionary, and it HAS to be called 'n'.
 
->>>>>>> origin/master
 ... And just in case you don't know, a "dictionary" (called in other languages
 a "map") is simply a collection of key-value pairs.
 The idea is that each key "maps" to a value. A dictionary can have only 1
@@ -162,22 +121,14 @@ Like, I'm not joking. I did not know Python when I started. It probably shows.
 '''
 
 emo = {FIRST:{"n":"http://i.imgur.com/bkNBdue.gif",
-<<<<<<< HEAD
-              "thinking":"http://i.imgur.com/aBJR10Q.gif"},
-=======
               "th":"http://i.imgur.com/aBJR10Q.gif"},
->>>>>>> origin/master
               SECOND:{"n":"http://i.imgur.com/We5xp4g.gif",
                       "m":"http://i.imgur.com/wdQfjDl.gif",
                       "h":"http://i.imgur.com/KP6MAm5.png"},
               THIRD:{"n":"http://i.imgur.com/SatVpMV.gif"},
               FOURTH:{"n":"http://i.imgur.com/WQDSksR.gif",
                       "w":"http://i.imgur.com/kYFPuGe.gif",
-<<<<<<< HEAD
-                      "thinking":"http://i.imgur.com/2UW4ECb.gif"},
-=======
                       "th":"http://i.imgur.com/2UW4ECb.gif"},
->>>>>>> origin/master
               FIFTH:{"n":"http://i.imgur.com/wnQF8Ct.gif",
                      "deadpan":"http://i.imgur.com/wHJ689Y.gif",
                      "m":"http://i.imgur.com/NMn1eZY.gif"},
@@ -185,21 +136,12 @@ emo = {FIRST:{"n":"http://i.imgur.com/bkNBdue.gif",
                      "tray":"http://i.imgur.com/0l86qzb.gif"},
               SEVENTH:{"n":"http://i.imgur.com/SghP8he.png"},
               EIGHTH:{"n":"http://i.imgur.com/w0KSf2D.gif",
-<<<<<<< HEAD
-                      "pleading":"http://i.imgur.com/ze297tq.gif",
-                      "h":"http://i.imgur.com/k94vUhn.gif",
-                      "crying":"http://i.imgur.com/j093gjm.gif"},
-              NINTH:{"n":"http://i.imgur.com/rtf1Iso.gif",
-                     "m":"http://i.imgur.com/XzJWHs8.gif",
-                     "thinking":"http://i.imgur.com/PtZ7TOr.png"},
-=======
                       "plead":"http://i.imgur.com/ze297tq.gif",
                       "h":"http://i.imgur.com/k94vUhn.gif",
                       "cry":"http://i.imgur.com/j093gjm.gif"},
               NINTH:{"n":"http://i.imgur.com/rtf1Iso.gif",
                      "m":"http://i.imgur.com/XzJWHs8.gif",
                      "th":"http://i.imgur.com/PtZ7TOr.png"},
->>>>>>> origin/master
               TENTH:{"n":"http://i.imgur.com/n9zAmzW.gif",
                      "h":"http://i.imgur.com/YhLfPbC.gif",
                      "m":"http://i.imgur.com/9Xp5tVB.gif",
@@ -207,11 +149,7 @@ emo = {FIRST:{"n":"http://i.imgur.com/bkNBdue.gif",
               ELEVENTH:{"n":"http://i.imgur.com/avsQIWT.gif",
                         "point":"http://i.imgur.com/qfBI1MH.gif",
                         "w":"http://i.imgur.com/pMcA34G.gif",
-<<<<<<< HEAD
-                        "thinking":"http://i.imgur.com/Vr7L2bf.gif"},
-=======
                         "th":"http://i.imgur.com/Vr7L2bf.gif"},
->>>>>>> origin/master
               TWELFTH:{"n":"http://i.imgur.com/s8ve83a.png",
                        "m":"http://i.imgur.com/jnBnKkp.png"},
               THIRTEENTH:{"n":"http://i.imgur.com/qQLrBqX.gif",
@@ -289,26 +227,7 @@ pixels wide respectively (10wide and 11wide).
 placedict = {1:"3wide",2:"3wide",3:"7wide",4:"9wide",5:"6wide",6:"7wide",
              7:"15wide",8:"9wide",14:"15wide"}
 
-'''
-What is this? This is a data structure called a set. 'bob' is in here so Python
-doesn't think it's a dictionary. They both look the same when they're empty.
-The two things you have to remember about sets are that their elements aren't
-in any order and they can't contain duplicates.
-If you try to give them a duplicate element, they'll delete it.
-Sets are important in programming and math. Just thought I'd share that.
-'''
-setofobjs = {'bob'}
 
-<<<<<<< HEAD
-'''
-Don't call main. Main prints the results of all the functions. That's not as
-useful.
-Call objects to call just the functions that print objects,
-And call macros to call the functions that print macros.
-Then paste the results into the appropriate text folder.
-'''
-def main():
-=======
 
 # These are used in the deletechars function later in this file.
 # Since all the places are written as [characterprefix]+[number],
@@ -337,7 +256,6 @@ def objects():
     initCourtObjs()
     
 def macros():
->>>>>>> origin/master
     '''
 In my attempt to make this code as customizeable as possible, you can change
 the way the courtroom scrolls here.
@@ -355,96 +273,6 @@ time, if that's your thing.
 
 def frames():
     '''
-<<<<<<< HEAD
-    hideall()
-
-def objects():
-    makeplace("3wide",wide3)
-    makeplace("6wide",wide6)
-    makeplace("7wide",wide7)
-    makeplace("9wide",wide9)
-    makeplace("15wide",wide15)
-    addEmoBgs()
-    addCourtBgs()
-    
-def macros():
-    transition()
-    hideall()
-    setemo()
-#If you think "_from_left" is too much to write, just change what's written
-#here to "l", "r", and "". Don't forget to change the bottom to match!
-    not_transition("left")
-    not_transition("right")
-    not_transition("center")
-
-def makeplace(strname,string):
-    print("Place "+strname+" {")
-    print("path: "+string)
-    print("}\n")
-
-
-def addCourtBgs():
-#Hoo, boy. This is the Nested Loop every Python developer tells you not to do.
-#The first loop iterates through the list of places.
-    for place in places:
-#The next layer iterates through the list of students.
-        for student in students:
-#The next layer iterates through the dictionary of images behind each student.
-            for bg in locbg[student]:
-#This layer iterates through the list of images.
-    
-#This layer runs once for each time the place is wider than the screen.
-
-                for x in range(int(place.replace("wide",''))):
-                    if (student != FIRST): #DEBUG
-                        break #DEBUG
-                    print(place + " background {")
-                    print("path: " + str(bgs.get(bg)))
-                    print("x: " + str(x*256))
-                    print("y: 0")
-                    print("name: " + bg +"_"+ str(x))
-                    print("hidden: true")
-                    print("}\n")
-            for fg in locfg[student]:
-#Okay, same deal, but for foregrounds.
-                for x in range(int(place.replace("wide",''))):
-                    if (student != "first"): #DEBUG
-                        break #DEBUG
-                    print(place + " background {")
-                    print("path: " + str(fgs.get(fg)))
-                    print("x: " + str(x*256))
-                    print("y: 0")
-                    print("name: " + fg +"_"+ str(x))
-                    print("hidden: true")
-                    print("}\n")
-#I know this function is called "addCourtBgs". It also does fgs.
-#I forgot about them until later.
-
-
-def addEmoBgs():
-#Here we go. Forbidden Nested Loop #2.
-#The first loop iterates through the list of places.
-    for place in places:
-#The next layer iterates through the list of students.
-        for student in students:
-#Each student corresponds to a dictionary whose keys are emotions and values
-       #are external image URLs.
-            emolist = emo[student]
-#The next layer iterates through the dictionary of that student's emotions.
-            for emotion in emolist.keys():
-#This layer runs once for each time the place is wider than the screen.
-               for x in range(int(place.replace("wide",''))):
-                      # if (student != FIRST):
-                       #    break
-                       print(place + " background {")
-                       print("path: " + emolist[emotion])
-                       print("x: " + str(x*256))
-                       print("y: 0")
-                       print("name: " + student + "_" +emotion+"_"+ str(x))
-                       print("hidden: true")
-                       print("}\n")
-               
-=======
 The first argument here is the frame anchor you use to start the routine that
 changes the emotions of all the still sprite background objects, and the
 second argument is the variable you will have to type repeatedly as you assign
@@ -569,24 +397,11 @@ def deletechars(place,string1,empty=''):
     else:
         return deletechars(place,string1[1:],empty)
 
->>>>>>> origin/master
 
 '''
 This function prints macros that cause the screen to seamlessly slide from
 any student to any other. It's the whole reason I did this.
 
-<<<<<<< HEAD
-... Or, at least, it's supposed to. It's not really working, and it eats a
-lot of frames. If anyone, after looking at this code and at the Catalysis
-guide, figures out what's wrong with it, please shoot me a message on Github
-asking to collaborate.
-
-If you can't, and you want to use a DanganRonpa courtroom in the meantime, I
-recommend using the not_transition methods in the meantime. That's the poor
-man's solution.
-'''
-def transition():
-=======
 For example, to scroll from a character with prefix zz to prefix xx, you'd type
 
 zz_to_xx
@@ -598,7 +413,6 @@ As you can see, the transition macro needs to be a separate frame.
 
 '''
 def transition(scrollType):
->>>>>>> origin/master
     for s1 in students:
         for s2 in students:
             if (s1 == s2):
@@ -618,78 +432,12 @@ def transition(scrollType):
 #    That percent sign means "modulus division", which is a fancy way of saying,
 #    "get the remainder after you divide". len() is just a function that gets
 #    you the length.
-<<<<<<< HEAD
-            dif = (len(students)/2)-dif%((len(students)/2)) if dif > len(students)/2 else dif
-=======
             dif = int((len(students)/2))-dif%int((len(students)/2)) if dif > int(len(students)/2) else dif
->>>>>>> origin/master
             endPos = "left" if startPos == "right" else "right"
             #print("dif = "+str(dif)) #(for debugging)
             endPos = "center" if float(placedict.get(dif).replace("wide",""))/2 > dif else endPos            
             #student1_to_student2 {
             print(s1 + "_to_"+s2+ " {")
-<<<<<<< HEAD
-            print("hideall")
-            print("erase")
-            #place, $place$, right/left
-            print("place, "+placedict.get(dif)+", "+startPos)
-            #set_sprite, student1, n
-            print("set_sprite, "+ s1 + ", "+ list(emo.get(s1).keys())[len(list(emo.get(s1).keys()))-1])
-            #Okay, see what I did in the previous line? More than 80 characters?
-            #Yeah, that's apparently bad ettiquette.
-            #At least, according to the app I learned Python from.
-            #But I don't know how to print without a line break at the end in
-            #Python 3, so Long Line stays.
-            print("CPos, "+startPos)
-            #set_sprite, student2, n
-            print("set_sprite, "+ s2 + ", "+ list(emo.get(s2).keys())[len(list(emo.get(s2).keys()))-1])
-            print("CPos, "+endPos)
-            #this loop goes through each "slot" in Place from right to left.
-            for y in range(int(placedict.get(dif).replace("wide","")),0,-1):
-                #newstudent is just the prefix for a student.
-                newstudent = students[(students.index(s1) -
-                    (int(placedict.get(dif).replace("wide",""))-y))%len(students)]
-                if(y!=0 and y!=int(placedict.get(dif).replace("wide",""))):
-                    checkemo(newstudent, dif,y)
-                    print("merge")
-                    print("anc $after"+newstudent+placedict.get(dif)+str(y)+":")
-                for bg in locbg.get(newstudent):
-                    print("RevObj")
-                    print(placedict.get(dif))
-                    print(bg+"_"+str(y))
-                '''
-You know, all this redundancy could be avoided with another dictionary.
-Maybe put the name of the object as the key and "foreground"/"background" as the
-value.
-That would save a lot of run time because you wouldn't be iterating through the
-same list as many times.
-... Anyone want to do this? Because I'll just be happy if it works.
-'''
-                for fg in locfg.get(newstudent):
-                    print("RevObj")
-                    print(placedict.get(dif))
-                    print(fg+"_"+str(y))
-            print("scroll, linear")            
-            print("}\n")
-
-
-'''
-this is not a function you should run by itself. It's part of transition().
-I don't even think you CAN call it by itself, since it requires a string
-and two ints as arguments, and where do you get those?
-'''
-def checkemo(student, dif,x):
-    print("condit, $after" + student+placedict.get(dif)+str(x))
-    for emotion in emo[student].keys():        
-        print(student+"_emo = "+emotion)
-        print("$"+student+emotion+str(x))
-    for emotion in emo[student].keys():
-        print("anc $"+student+emotion+str(x)+":")
-        print("revObj")
-        print(placedict.get(dif))
-        print(student + "_" +emotion+"_"+ str(x))
-        print("proceed, $after"+student+placedict.get(dif)+str(x))
-=======
             if (startPos == 'right'):
                 if(endPos=='left'):
                     print("place, "+s2+"+"+str(dif)+", "+startPos)
@@ -813,7 +561,6 @@ def checkemo(student):
             print("proceed, afterCheckAll")
             print()
 
->>>>>>> origin/master
 
 '''
 This function creates a series of macros of the type xx_y, where xx is the
@@ -822,24 +569,12 @@ character's prefix and y is the emotion suffix. This sets a character's
 
 That does mean it ends up looking something like:
 
-<<<<<<< HEAD
-xx_y
-xx.y:
-=======
 xx.y
 xx_y:
->>>>>>> origin/master
 This is some text I (the character) am saying.
 
 That's some redundant typing, I know,
 but this way, you get that DanganRonpa effect where the background characters
-<<<<<<< HEAD
-are displaying the emotion they last had.
-'''
-
-
-def setemo():
-=======
 are displaying the emotion they last had, as long as you use the frames
 generated by the frames() function to set them per the variables these macros
 redefine.
@@ -847,7 +582,6 @@ redefine.
 
 
 def setemo(scrollType):
->>>>>>> origin/master
     for student in students:
         for emotion in emo.get(student,"ERROR").keys():
             print(student+"_"+emotion+" {")
@@ -863,13 +597,10 @@ def setemo(scrollType):
             print()
 
 
-<<<<<<< HEAD
-=======
 
 
 
 
->>>>>>> origin/master
 '''
 This function creates two macros that let you pan in on a character from the
 starting point of... right next to the character.
@@ -878,49 +609,6 @@ when you have identical backgrounds behind all the characters.
 In addition to xx_from_left and xx_from_right, there's a third macro,
 "xx_from_center". That lets you cut directly to the character, no pan.
 This is useful when transitioning from any "judge" figure you have.
-<<<<<<< HEAD
-'''
-def not_transition(direction):
-    for student in students:
-        if(len(direction)>0):
-            print(student+"_from_"+direction+" {")
-        else:
-#this covers the case where someone wants to use short characters for this.
-#I prefer the other way, because it's easier to read, so the code works for
-#both.
-            print(student+"_from_c {")
-        print("erase")
-#If you changed the arguments to be one letter long, you have to change
-#" of center" to "c". Don't forget the space.
-        if(direction[0]!='c'):
-            print("place, 3wide, "+direction+" of center")
-        else:
-            print("place, 3wide, center")
-        for x in range(students.index(student)-1,students.index(student)+1):
-            newstudent = students[x%(len(students))]
-            for bg in locbg.get(newstudent):
-                print("RevObj")
-                print(placedict.get(1))
-                print(bg+"_"+str(x))                
-            for fg in locfg.get(newstudent):
-                print("RevObj")
-                print(placedict.get(1))
-                print(fg+"_"+str(x))
-        print("set_sprite ," +student+", "+list(emo.get(student).keys())[0])
-        print("cPos, center")
-        print("}\n")
-            
-'''
-This is important: This function shows the background objects of your
-character's neighbors, and the foreground objects of your character's
-neighbors, but it doesn't show your neighbors.
-This is to conserve frames, which are a finite resource when making trials.
-If enough people complain, I'll fix this.
-'''
-
-
-
-=======
 ... Or when you don't want to scroll all the way, but have two characters with
 identical backgrounds and don't want to look like one of them shape-shifted.
 '''
@@ -938,46 +626,9 @@ def notTransition(direction):
         print("set_sprite, "+student+", n")
         print("wait, 1")
         print("}\n")
->>>>>>> origin/master
 
 
 
 
 
 
-<<<<<<< HEAD
-
-'''
-This function's job is to hide every single foreground and background object.
-Basically, everything Catalysis's erase doesn't do.
-This function is necessary, because we only have 1 place of each size that we
-reuse over and over with different backdrops (and... frontdrops?), like a stage
-with actors. This function would be the equivalent of the stagehands taking the
-props away for the next scene.
-It's time-consuming even to type the macro into Catalysis manually, so can you
-imagine putting this into AAO every time?
-'''
-def hideall():
-    print("hideall {")
-    for place in places:
-        for student in students:
-            emolist = emo[student]
-            for emotion in emolist.keys():
-                for x in range(int(place.replace("wide",""))):                
-                    candidate = place+"_"+student + "_" +emotion+"_"+ str(x)                    
-                    if(candidate not in setofobjs):
-                        print("hideObj")
-                        print(place)
-                        print(student + "_" +emotion+"_"+ str(x)+"\n")
-                        setofobjs.add(candidate)
-            for bg in locbg[student]:
-                for x in range(int(place.replace("wide",""))):
-                    if((bg+"_"+str(x)) in setofobjs):
-                       continue
-                    print("hideObj")
-                    print(place)
-                    print(bg+"_"+ str(x))
-                    setofobjs.add(bg+"_"+ str(x))
-    print("}\n")
-=======
->>>>>>> origin/master
