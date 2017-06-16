@@ -115,7 +115,8 @@ dictionary, and it HAS to be called 'n'.
 a "map") is simply a collection of key-value pairs.
 The idea is that each key "maps" to a value. A dictionary can have only 1
 of each key, but more than one value if you want.
-In the case below, the keys are the emotion suffixes, and the values are
+In the case below, the keys are the students, and the values are other
+dictionaries. In THOSE, the keys are emotion suffixes, and the values are
 the URLs. Isn't this an educational hobby?
 Like, I'm not joking. I did not know Python when I started. It probably shows.
 '''
