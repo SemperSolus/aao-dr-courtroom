@@ -247,8 +247,8 @@ setofobjs = {'bob'}
 
 
 
-#alphabetplus = "abcdefghijklmnopqrstuvwxyz+"
-
+alphabetplus = "abcdefghijklmnopqrstuvwxyz+"
+numberplus = "1234567890+"
 
 '''
 The idea of this list is to hold all the places that were created so they can
@@ -284,16 +284,15 @@ def objects():
     
 def macros():
     transition()
-
     setemo()
 #If you think "_from_left" is too much to write, just change what's written
-#here to "l", "r", and "". 
+#here to "l", "r", and "c". 
     notTransition("left")
     notTransition("right")
     notTransition("center")
 
 def frames():
-    checkall()
+    checkall("checkAll","backFromCheckAll")
 
 
 
@@ -335,11 +334,12 @@ def initCourtObjs():
     for place in createdPlaces:
         #if (place[2:4] == "+5"): #DEBUG
          #   break #DEBUG
-        s1 = replaceit(place,"+1234567890","")        
+        s1 = deletechars(place,numberplus)        
 #If I got this right, that code is supposed to take the place name, get rid of
 #the student name, and then start with the second character to get rid of the
 #plus sign.
-        for x in range(int(place.replace(s1,'')[1:])+1):
+        #x goes from 0 to [number after the plus]?
+        for x in range(int(place.replace(s1,'')[1:])):
             emolist = emo[students[(students.index(s1)+x)%len(students)]]
             for bg in locbg.get(students[(students.index(s1)+x)%len(students)]):
                 print(place+" background {")
@@ -361,12 +361,13 @@ def initCourtObjs():
                 print("hidden: false")
                 print("}\n")            
             for emotion in emolist.keys():
-                if (students[(students.index(s1)+x)%len(students)]==s1):
+                #if (students[(students.index(s1)+x)%len(students)]==s1):
+                if(x ==0):
                     continue
                 if (students[(students.index(s1)+x)%len(students)]==
-                    students[(students.index(s1)+(int(place.replace(s1,'')[1:])+1))%len(students)]):
+                    students[(students.index(s1)+(int(place.replace(s1,'')[1:])))%len(students)]):
                     continue
-                if (int(place.replace(s1,'')[1:])%2==0):
+                if (int(place.replace(s1,'')[1:])/x==2):
                     continue
                 print(place+" background {")
                 print("name: "+students[(students.index(s1)+x)%len(students)]
@@ -383,12 +384,12 @@ in the second argument, and removes every instance of it from the first
 argument.
 ... Which, in this case, leaves just the student prefix.
 '''
-def replaceit(place,string1,empty):
+def deletechars(place,string1,empty=''):
     place = place.replace(string1[0],empty)
     if (len(string1)==1):
         return place.replace(string1[0],empty)
     else:
-        return replaceit(place,string1[1:],empty)
+        return deletechars(place,string1[1:],empty)
 
 
 '''
@@ -530,17 +531,26 @@ def transition():
                                     
 
 
-def checkall():
+def checkall(checkAll, backFromCheckAll):
     if not createdPlaces:
         harmlessMakePlace()
-    print("anc, checkAll")
+    print("anc, "+checkAll)
     print("wait, 1\n")    
     for student in students:
         print("wait, 1")
         print("hideObj")
         for emotion in emo[student].keys():
             for place in createdPlaces:
-                print(place+", "+student+"_"+emotion)
+                personInPlace = False
+                #if (student==deletechars(place,numberplus) or
+                #   (students.index(student)==(students.index(deletechars(place,numberplus))+int(deletechars(place,alphabetplus))))
+                #   or (students.index(student)==students.index(deletechars(place,numberplus))+(int(deletechars(place,alphabetplus)))/2)):
+                #    continue
+                for x in range(1,int(deletechars(place,alphabetplus))-1):
+                    if(students[(students.index(deletechars(place,numberplus))+x)%len(students)]==student and x*2!=int(deletechars(place,alphabetplus))):
+                        personInPlace = True
+                if (personInPlace):
+                    print(place+", "+student+"_"+emotion)
         print()
         checkemo(student)
         if(student != students[-1]):
@@ -548,7 +558,7 @@ def checkall():
         else:
             print("\nanc, afterCheckAll")
     print("wait, 1")
-    print("proceed, $backFromCheckAll\n")
+    print("proceed, {"+backFromCheckAll+"}\n")
         
         
 
@@ -557,7 +567,10 @@ def checkemo(student):
     if not createdPlaces:
         harmlessMakePlace()
     print("wait, 1")
-    print("condit, after"+student)
+    if (student != students[-1]):
+        print("condit, after"+student)
+    else:
+        print("condit, afterCheckAll")
     for emotion in emo[student].keys():
         print(student+"emo = "+emotion+", "+student+"_is_"+emotion)
     print()
@@ -566,7 +579,12 @@ def checkemo(student):
         print("wait, 1")
         print("revObj")
         for place in createdPlaces:
-            print(place+", "+student+"_"+emotion)
+            personInPlace = False
+            for x in range(1,int(deletechars(place,alphabetplus))-1):
+                if(students[(students.index(deletechars(place,numberplus))+x)%len(students)]==student and x*2!=int(deletechars(place,alphabetplus))):
+                    personInPlace = True
+            if (personInPlace):
+                print(place+", "+student+"_"+emotion)
         print()
         if (student != students[-1]):
             print("wait, 1")
@@ -663,43 +681,3 @@ def notTransition(direction):
 
 
 
-
-
-'''
-This function's job is to hide every single foreground and background object.
-Basically, everything Catalysis's erase doesn't do.
-This function is necessary, because we only have 1 place of each size that we
-reuse over and over with different backdrops (and... frontdrops?), like a stage
-with actors. This function would be the equivalent of the stagehands taking the
-props away for the next scene.
-It's time-consuming even to type the macro into Catalysis manually, so can you
-imagine putting this into AAO every time?
-'''
-def hideall():
-    print("hideall {")
-    print("hideObj")
-    for place in places.keys():
-        for student in students:
-            emolist = emo[student]
-            for emotion in emolist.keys():            
-                for x in range(int(place.replace("wide",""))):                
-                    candidate = place+"_"+student + "_" +emotion+"_"+ str(x)                    
-                    if(candidate not in setofobjs):
-                        print(place+", "+student + "_" +emotion+"_"+ str(x))
-                        setofobjs.add(candidate)
-            for bg in locbg[student]:
-                for x in range(int(place.replace("wide",""))):
-                    if((bg+"_"+str(x)) in setofobjs):
-                       continue
-                    #print("hideObj")
-                    print(place+", "+bg+"_"+ str(x))
-                    setofobjs.add(bg+"_"+ str(x))
-            for fg in locfg[student]:
-                for x in range(int(place.replace("wide",""))):
-                    if((fg+"_"+str(x)) in setofobjs):
-                       continue
-                    #print("hideObj")
-                    print(place)
-                    print(fg+"_"+ str(x))
-                    setofobjs.add(fg+"_"+ str(x))
-    print("}\n")
