@@ -260,7 +260,7 @@ def objects():
     
 def macros():
     '''
-In my attempt to make this code as customizeable as possible, you can change
+In my attempt to make this code as customizable as possible, you can change
 the way the courtroom scrolls here.
 If you don't type "none", "linear", "bezier", "ease_in", or "ease_out",
 It won't type a scroll at all, and you'll have to put in a scroll type each
@@ -291,12 +291,11 @@ in a python file.
 '''
 There are a lot of places. How many places?
 Take the number of trial participants, and divide it by 2.
-Take away all the odd powers of 2 from 1 until that number, inclusive.
-Take away the even numbers that aren't even powers of 2 from 1 until that
-number, inclusive.
+Take away the number of odd powers of 2 from 1 until that number, inclusive.
+Take away the number even numbers that aren't even powers of 2 from 1 until
+that number, inclusive.
 Take the number you have now, and multiply it by the number of participants.
 In the program's default settings, this number is 80.
-If you add to 
 '''
 def makePlace():
     global createdPlaces
@@ -391,7 +390,7 @@ As long as the third argument is an empty string, it takes every character
 in the second argument, and removes every instance of it from the first
 argument.
 It also can be used for other stuff. Want to change every vowel in The Cat in
-the Hat to a double "o"? Just type deletechars(text, 'oaeiuy', 'oo').
+the Hat to a double "o"? Just type deletechars(text, 'oaeiu', 'oo').
 It works as long as you've previously assigned the variable text the value of
 the entire text of The Cat in the Hat.
 (And it won't work on capital letters)
@@ -506,6 +505,9 @@ X can be whatever you want. You'll be using a bunch of different X's as you
 In the first frame, you set the return frame, which is the third frame.
 In the second frame, you do the calling of the function, by which I mean you
 go to the frame where the function starts.
+
+Again, if you set the checkAll and backFromCheckAll arguments to something else,
+you're obviously not typing exactly what I put up there.
 '''
 def checkall(checkAll, backFromCheckAll):
     #There are comments for where the code starts and ends for your convenience.
