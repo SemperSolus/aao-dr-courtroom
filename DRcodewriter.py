@@ -108,8 +108,9 @@ To be clear, the URLs you're putting in are for the sprites that DON'T TALK.
 This code absolutely does not work with the pre-installed AAO sprites.
 (I'm not saying it's impossible; I'm just saying it's a lot of work for me.)
 
-Also note that a sprite's "default" expression should be first in the
-dictionary, and it HAS to be called 'n'.
+Also note that each character has to have a "default" emotion, and it HAS
+to be called either 'n' (normal), 'dead', or 'gone' (for an empty spot).
+If none of those are there, a random emotion will be selected as the default.
 
 ... And just in case you don't know, a "dictionary" (called in other languages
 a "map") is simply a collection of key-value pairs.
@@ -275,6 +276,7 @@ time, if that's your thing.
     notTransition("center")
 
 def frames():
+    initEmo()
     '''
 The first argument here is the frame anchor you use to start the routine that
 changes the emotions of all the still sprite background objects, and the
@@ -309,6 +311,8 @@ def makePlace():
             print("path: "+places.get(place))
             print("}\n")
             createdPlaces.append(student+"+"+(str(int(place.replace("wide",''))-1)))
+#This line exists so that you can run makePlace() twice and there are no repeats in the createdPlaces() list.
+#If there are repeats, the program will write the same object twice, and Catalysis will report errors.
     createdPlaces = list(set(createdPlaces))
 
 
@@ -387,6 +391,7 @@ def initCourtObjs():
 '''
 This is a companion function to the above method.
 As long as the third argument is an empty string, it takes every character
+(character: part of a string, not character: actor in a story)
 in the second argument, and removes every instance of it from the first
 argument.
 It also can be used for other stuff. Want to change every vowel in The Cat in
@@ -455,20 +460,26 @@ def transition():
                     print("place, "+s1+"+"+str(dif)+", "+startPos)
                 else:
                     print("place, "+s1+"+"+str(dif*2)+", "+startPos)
-            print("set_sprite, "+s1+", n")
+            print("set_sprite, "+s1+", ",end='')
+            printemo(s1)
             print("cPos, "+startPos)
-            print("set_sprite, "+s2+", n")
+            print("set_sprite, "+s2+", ",end='')
+            printemo(s2)
             print("cPos, "+endPos)
+            otherStudent = ''
             if(startPos=="left"):
                 if(endPos=='right'):
-                    print("set_sprite, "+students[(students.index(s1)+int(dif/2))%len(students)]+", n")
+                    #print("set_sprite, "+students[(students.index(s1)+int(dif/2))%len(students)]+", ", end='')
+                    otherStudent = students[(students.index(s1)+int(dif/2))%len(students)]
                 else:
-                    print("set_sprite, "+students[(students.index(s1)+int(dif*2))%len(students)]+", n")
+                    otherStudent = students[(students.index(s1)+int(dif*2))%len(students)]
             else:
                 if(endPos=='left'):
-                    print("set_sprite, "+students[(students.index(s1)-int(dif/2))%len(students)]+", n")
+                    otherStudent = students[(students.index(s1)-int(dif/2))%len(students)]
                 else:
-                    print("set_sprite, "+students[(students.index(s1)-int(dif*2))%len(students)]+", n")
+                    otherStudent = students[(students.index(s1)-int(dif*2))%len(students)]
+            print("set_sprite, "+otherStudent+", ", end='')
+            printemo(otherStudent)
 #I imported logarithms just for this if. The difference between students has to
 #be even--but not an even power of two--in order for the third student to be in
 #the center.
@@ -482,6 +493,30 @@ def transition():
             print("wait, 5")
             print("}\n")
             
+'''
+This function prints the default emotion of a student, whatever it may be.
+
+It's pretty easy to see how this function works. If you want to make another
+exception to the rules (besides the ones I already made for dead and absent
+characters), just put in another elif.
+
+You might also need to rearrange them, since they're checked in descending
+order.
+'''
+def printemo(student):
+    if "n" in emo[student]:
+        print("n")
+    elif "dead" in emo[student]:
+        print("dead")
+    elif "gone" in emo[student]:
+        print("gone")
+    else:
+        for emotion in emo[student].keys():
+            print(emotion)
+            break
+
+
+
 '''
 This function generates a little under 200 frames, which hide all the background
 objects that are emotions people who aren't currently feeling.
@@ -572,6 +607,27 @@ def checkemo(student):
             print("proceed, afterCheckAll")
             print()
 
+                    
+'''
+This code makes a single frame that I'd advise you to put at the start
+of your trial. It sets the default emotions for all the trial participants,
+except for any judge-esque or counsel-like figure you may use.
+
+Once you use this, you can run the checkAll function during the trial, and
+all the characters you scroll past will have their appropriate emotions.
+
+(default until set otherwise with the xx_yy macro)
+'''
+def initEmo():
+    print("//CODE STARTS HERE")
+    print("wait, 1")
+    print("varDef")
+    for student in students:
+        print(student+"_emo, ", end='')
+        printemo(student)
+    print("//CODE ENDS HERE\n")                    
+                    
+                 
 
 '''
 This function creates a series of macros of the type xx_y, where xx is the
