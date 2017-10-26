@@ -294,7 +294,7 @@ in a python file.
 There are a lot of places. How many places?
 Take the number of trial participants, and divide it by 2.
 Take away the number of odd powers of 2 from 1 until that number, inclusive.
-Take away the number even numbers that aren't even powers of 2 from 1 until
+Take away the number of even numbers that aren't even powers of 2 from 1 until
 that number, inclusive.
 Take the number you have now, and multiply it by the number of participants.
 In the program's default settings, this number is 80.
