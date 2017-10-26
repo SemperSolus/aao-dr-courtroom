@@ -541,6 +541,24 @@ In the first frame, you set the return frame, which is the third frame.
 In the second frame, you do the calling of the function, by which I mean you
 go to the frame where the function starts.
 
+... Maybe I should explain this in greater detail.
+STEP 1: Type "checkall(Y, Z)" into your python shell. Y is what you're calling
+your checkAll frame anchor, and Z is the name of the variable the return frame
+anchor is stored in. By default, they're called "checkAll" and "backFromCheckAll",
+respectively.
+STEP 2: Hit Enter/Return. It's going to spit out the Catalysis script for a few
+hundred frames. These change the emotions of courtroom sprites that aren't on the
+left, right, or center.
+STEP 3: Paste this frame block somewhere in your trial, preferably between other
+frames you're using. Use "proceed" to skip over it.
+STEP 4: Whenever you want to update the sprites, paste in the three frames I
+wrote up there (replacing checkAll and backFromCheckAll with whatever you decided
+on).
+STEP 5: Pick a new frame anchor for X each time you paste it. Now, each time those
+frames are encountered, AAO jumps to the big frame block, runs through it,
+and then jumps back.
+In essence, AAO v6 supports functions made from frames, and this is cool.
+
 Again, if you set the checkAll and backFromCheckAll arguments to something else,
 you're obviously not typing exactly what I put up there.
 '''
@@ -649,6 +667,10 @@ redefine.
 As you can see, the scroll type is determined in this function so I only have
 to write one macro. You're going to be using one of these macros every time
 you want scrolling, even if you don't care about setting background emotions.
+
+One more thing:
+The macro with the underscore HAS to be on the bottom, because it contains
+varDef, which has multiple arguments.
 '''
 
 
