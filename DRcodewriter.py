@@ -416,8 +416,8 @@ For example, to scroll from a character with prefix zz to prefix xx, you'd type
 
 zz_to_xx
 
-zz.y
-zz_y
+xx.y
+xx_y
 
 As you can see, the transition macro needs to be a separate frame.
 
